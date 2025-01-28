@@ -5,9 +5,11 @@ __pycache__/
 
 # C extensions
 *.so
+*.zip
 
 # Distribution / packaging
 .Python
+package/
 build/
 develop-eggs/
 dist/
