@@ -1,9 +1,9 @@
-# import lambda_function
+import lambda_function
 
-# if __name__ == '__main__':
-#     dic = {
-#         "QueryStringParameters": {
-#             "cityName": "Paris"
-#         }
-#     }
-#     print(lambda_function.lambda_handler(dic, None)["response"])
+if __name__ == '__main__':
+    dic = {
+        "queryStringParameters": {
+            "cityName": "Paris"
+        }
+    }
+    print(lambda_function.lambda_handler(dic, None)["response"])
