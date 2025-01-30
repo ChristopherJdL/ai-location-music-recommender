@@ -3,9 +3,9 @@ import boto3
 import prompts.values as prompts
 
 MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
-# connect bedrock
-# connect spotify API
-# if spotify API doesnt return anything with song and artist, try with song only, and of still not, try get a default song.
+# connect bedrock ✅
+# connect spotify API 
+# default song: if spotify API doesnt return anything with song and artist, try with song only, and of still not, try get a default song.
 def lambda_handler(event, context):
     city = event["queryStringParameters"]["cityName"]
     song = get_song(city)
