@@ -12,9 +12,7 @@ def lambda_handler(event, context):
     return {"response" : song}
 
 def get_song(city):
-    client = boto3.client("bedrock-runtime", region_name="eu-west-2",
-                          aws_access_key_id=os.getenv("A86K6fA2C8C"),
-                          aws_secret_access_key=os.getenv("A86S6fA2C8C"))
+    client = boto3.client("bedrock-runtime", region_name="eu-west-2")
     
     conversation = [
         {

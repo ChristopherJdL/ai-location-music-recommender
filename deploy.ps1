@@ -1,4 +1,4 @@
-#source bin/activate #to go into virtual env
+#source my_virtual_env/bin/activate #to go into virtual env
 
 
 #pip3 install --target ./package boto3
