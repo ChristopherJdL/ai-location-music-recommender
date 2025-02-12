@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     return {"response" : songInfo}#more elements in the response
 
 def get_song(city):
-    session = boto3.Session() #todo: remove
+    session = boto3.Session()
     client = session.client("bedrock-runtime", region_name="eu-west-2")
 
     conversation = [
