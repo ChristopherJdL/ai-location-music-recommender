@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 bin/
 my_virtual_env
+spotify-api-curl.ps1
 
 # C extensions
 *.so

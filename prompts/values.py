@@ -3,6 +3,7 @@ Here is your chain of thought:
 First, you will say which city is that Station from.
 Then, you will say an artist coming from that city.
 Next, you will select the song from that artist that matches most the city in your opinion."""
+#notes: XML tags, read the claude docs.
 
 exampleClientInput = "Moscow"
 
