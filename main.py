@@ -3,7 +3,7 @@ import lambda_function
 if __name__ == '__main__':
     dic = {
         "queryStringParameters": {
-            "cityName": "Paris"
+            "cityName": "Lyon"
         }
     }
-    print(lambda_function.lambda_handler(dic, None)["response"])
+    print(lambda_function.lambda_handler(dic, None))

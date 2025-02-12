@@ -5,6 +5,7 @@ __pycache__/
 bin/
 my_virtual_env
 spotify-api-curl.ps1
+.rlnme
 
 # C extensions
 *.so

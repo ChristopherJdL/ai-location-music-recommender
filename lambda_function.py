@@ -6,15 +6,14 @@ import json
 MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
 # connect bedrock ✅
 # connect spotify API 
-# default song: if spotify API doesnt return anything with song and artist, try with song only, and of still not, try get a default song.
 def lambda_handler(event, context):
     city = event["queryStringParameters"]["cityName"]
-    song = get_song(city)
+    song = get_song_from_curator(city)
     
-    songInfo = get_spotify_song(song["artist"], song["song"])
-    return {"response" : songInfo}#more elements in the response
+    songInfo = get_spotify_song(song["artist"], song["song"], city)
+    return songInfo #more elements in the response
 
-def get_song(city):
+def get_song_from_curator(city):
     session = boto3.Session()
     client = session.client("bedrock-runtime", region_name="eu-west-2")
 
