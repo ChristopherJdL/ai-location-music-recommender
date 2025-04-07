@@ -11,5 +11,6 @@ cd ..
 zip deployment_package.zip lambda_function.py                            
 zip deployment_package.zip prompts/*
 zip deployment_package.zip spotify/*
+zip deployment_package.zip curator/*
 
 # aws lambda update-function-code --zip-file ./my_deployment_package.zip --publish

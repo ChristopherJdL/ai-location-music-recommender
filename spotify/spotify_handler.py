@@ -7,15 +7,15 @@ SPOTIFY_CLIENT_ID = environ.get("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET = environ.get("SPOTIFY_CLIENT_SECRET")
 
 def get_spotify_song(artist, song, city):
-    song = None
+    returnedSong = None
 
     try:
         token = get_auth_token()
-        song = get_song(token, artist, song, city)
+        returnedSong = get_song(token, artist, song, city)
     except:
         return get_default_song(city)
-    
-    return song
+
+    return returnedSong
 
 def get_song(token, artist, song, city):
     connection = client.HTTPSConnection("api.spotify.com")
@@ -40,14 +40,26 @@ def get_song(token, artist, song, city):
     document = json.loads(responseJson)
 
     document["tracks"]["items"][0]
+    return get_most_relevant_song(city, document, artist, song)
+
+def get_most_relevant_song(city, document, curatedArtist, curatedSong : str):
+    track = list(filter(lambda item:
+                               item["name"].lower().startswith(curatedSong.lower())
+                               and is_artist_from_curation(item, curatedArtist),
+                        document["tracks"]["items"]))[0]
+
     return {
-        "spotifyUrn": document["tracks"]["items"][0]["uri"],
-        "artist": document["tracks"]["items"][0]["artists"][-1]["name"],
-        "songName": document["tracks"]["items"][0]["name"],
-        "album": document["tracks"]["items"][0]["album"]["name"],
-        "image": document["tracks"]["items"][0]["album"]["images"][0],
+        "spotifyUrn": track["uri"],
+        "artist": curatedArtist,
+        "songName": track["name"],
+        "album": track["album"]["name"],
+        "image": track["album"]["images"][0]["url"],
         "city": city
-    }
+     }
+
+def is_artist_from_curation(item, curatedArtist):
+    artistsMatchingCuration = list(filter(lambda artist: artist["name"].lower().startswith(curatedArtist.lower()), item["artists"]))
+    return len(artistsMatchingCuration) != 0
 
 def get_auth_token():
     connection = client.HTTPSConnection("accounts.spotify.com")
@@ -73,7 +85,7 @@ def get_default_song(city):
     return {
         "spotifyUrn": "spotify:track:2Foc5Q5nqNiosCNqttzHof",
         "artist": "Daft Punk",
-        "songName": "Get Lucky (Radio Edit) [feat. Pharrell Williams and Nile Rodgers]",
+        "songName": "Get Lucky (Radio Mix)",
         "album": "Get Lucky",
         "image": "https://i.scdn.co/image/ab67616d0000b2731d5cf960a92bb8b03fc2be7f",
         "city": city
